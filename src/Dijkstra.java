@@ -30,7 +30,10 @@ public class Dijkstra {
                 //Insere o vertice na lista de vertices nao visitados 
                 this.naoVisitados.add(grafo.getVertices().get(i));
         }
-        Collections.sort(naoVisitados);
+//        Collections.sort(naoVisitados);
+        System.out.println(naoVisitados);
+        
+        
         // O algoritmo continua ate que todos os vertices sejam visitados
         while (!this.naoVisitados.isEmpty()) {
         	// Toma-se sempre o vertice com menor distancia, que eh o primeiro da lista
@@ -45,14 +48,12 @@ public class Dijkstra {
         		vizinho = atual.getArestas().get(i).getDestino();
         		if (!vizinho.verificarVisita()){
         			int distancia = atual.getDistancia() + atual.getArestas().get(i).getPeso();
-        			// Regra para acrescentar x na distância caso seja necessário trocar de linha
-        			if ((grafo.encontrarAresta(atual.getPai(), atual)!=null) && (grafo.encontrarAresta(atual, vizinho)!=null))
-        				if (grafo.encontrarAresta(atual.getPai(), atual).getLinha() != grafo.encontrarAresta(atual, vizinho).getLinha())
-        					distancia += trocarLinha;
+        			
         			// Comparando a distância do vizinho com a possível distância
                     if (vizinho.getDistancia() > distancia) {
                         vizinho.setDistancia(distancia);
                         vizinho.setPai(atual);
+           
                         // Se o vizinho eh o vertice procurado, e foi feita uma mudanca na distancia, a lista com o menor caminho
                         // anterior eh apagada, pois existe um caminho menor vertices pais, ateh o vertice origem.
                         if (vizinho == v2) {
@@ -78,6 +79,10 @@ public class Dijkstra {
         linha(menorCaminho);
         return menorCaminho;
     }
+    
+ 
+    
+    //lista o caminho
     
     public void linha(List<Point> lista) {
     	Hour a = new Hour();
